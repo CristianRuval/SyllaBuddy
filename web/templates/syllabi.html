@@ -1,0 +1,33 @@
+{{define "content"}}
+<section class="container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Syllabi Library</h1>
+      <p class="page-subtitle">Manage uploaded course PDFs, inspect extracted timelines, or remove files anytime.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <label class="btn btn-primary" for="syllabiFileInput" style="cursor: pointer;">
+        Upload PDF Syllabus
+      </label>
+      <input id="syllabiFileInput" type="file" accept=".pdf,application/pdf" class="hidden">
+    </div>
+  </div>
+
+  <div class="alert alert-info mb-4">
+    <span>
+      <strong>Processing notice:</strong> Newly uploaded syllabi typically finish Gemini AI extraction within 5–20 seconds. Cards marked <em>Processing</em> update automatically once parsed.
+    </span>
+  </div>
+
+  <div id="syllabiEmptyState" class="card hidden">
+    <h2 class="card-title">No syllabi uploaded yet</h2>
+    <p class="muted mt-2">Upload your first course syllabus PDF to extract exams, assignments, and holidays automatically.</p>
+  </div>
+
+  <div id="syllabiGrid" class="grid grid-3">
+    <div class="card">
+      <p class="muted small" style="margin: 0;">Loading syllabi...</p>
+    </div>
+  </div>
+</section>
+{{end}}

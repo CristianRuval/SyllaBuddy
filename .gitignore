@@ -1,0 +1,28 @@
+# --- Security ---
+# Never commit your secrets!
+backend/.env
+
+# --- Python ---
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+.venv/
+ENV/
+
+# --- Databases ---
+# If you happen to have local SQLite files or log files
+*.db
+*.log
+
+# --- OS specific ---
+.DS_Store
+Thumbs.db
+
+# --- IDEs ---
+.vscode/
+.idea/

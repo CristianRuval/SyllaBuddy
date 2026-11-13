@@ -1,0 +1,46 @@
+{{define "content"}}
+<section class="container container-narrow prose">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-subtitle">How SyllaBuddy collects, processes, protects, and deletes your academic and account information.</p>
+    </div>
+    <span class="pill pill-info">Effective 2026 Beta</span>
+  </div>
+
+  <div class="card">
+    <p><strong>Summary:</strong> SyllaBuddy is an academic scheduling tool. We collect only the information required to run your account, parse the syllabus PDFs you choose to upload, and optionally sync events to your Google Calendar.</p>
+
+    <h2>1. Information We Collect</h2>
+    <ul>
+      <li><strong>Account Data:</strong> Username, email address, and bcrypt-hashed password (or verified Google Sign-In email/subject identifier when using Google Sign-In).</li>
+      <li><strong>User-Uploaded Content:</strong> Course syllabus PDFs you upload, generated first-page preview thumbnails, and extracted or user-edited course metadata and calendar events.</li>
+      <li><strong>Operational Logs:</strong> Standard HTTP access and error logs (request path, status code, latency, IP address) retained briefly for security, rate limiting, and debugging. Passwords, session tokens, and API keys are never logged.</li>
+    </ul>
+
+    <h2 id="google-limited-use">2. Google API Services User Data Policy (Limited Use)</h2>
+    <div class="alert alert-info">
+      <span>
+        SyllaBuddy's use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>, including the Limited Use requirements.
+      </span>
+    </div>
+    <ul>
+      <li><strong>Google Sign-In:</strong> Used solely to verify your identity and sign you into your SyllaBuddy account.</li>
+      <li><strong>Google Calendar Sync:</strong> When you explicitly click "Sync to Google Calendar," SyllaBuddy requests short-lived OAuth permission (<code>https://www.googleapis.com/auth/calendar.events</code>) to create your course events in your Google Calendar. We do not read unrelated calendars, sell data, transfer data to third-party brokers, or use Google Workspace data for advertising or AI model training.</li>
+    </ul>
+
+    <h2>3. Gemini AI PDF Processing</h2>
+    <p>When you upload a syllabus PDF, its contents are transmitted securely to Google's Gemini API solely to extract structured course titles, instructors, and academic dates. Do not upload sensitive personal documents, financial records, or confidential third-party files—upload academic course syllabi only.</p>
+
+    <h2>4. Cookies &amp; Local Storage</h2>
+    <ul>
+      <li><strong>Essential Session Cookie:</strong> SyllaBuddy sets a strictly necessary <code>HttpOnly</code>, <code>SameSite=Lax</code> authentication cookie so your browser can load pages, thumbnails, and PDFs securely without exposing tokens to JavaScript.</li>
+      <li><strong>Theme Preference:</strong> Your light/dark theme choice is stored locally in your browser under <code>localStorage["syllabuddy-theme"]</code>.</li>
+      <li><strong>No Ad or Tracking Cookies:</strong> SyllaBuddy does not use third-party advertising cookies or cross-site trackers.</li>
+    </ul>
+
+    <h2>5. Data Isolation, Retention &amp; Deletion</h2>
+    <p>Uploaded syllabi and calendar events are isolated strictly to your user account and are never published or shared with other users. You may delete any individual syllabus from <a href="/dashboard/syllabi">Syllabi</a> or permanently delete your entire account and all stored files at any time from <a href="/dashboard/settings">Settings</a>.</p>
+  </div>
+</section>
+{{end}}

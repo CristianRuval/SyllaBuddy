@@ -1,0 +1,115 @@
+{{define "content"}}
+<section class="container hero">
+  <span class="eyebrow">
+    <span>Gemini PDF Intelligence</span>
+    <span aria-hidden="true">·</span>
+    <span>Calendar Sync Ready</span>
+  </span>
+
+  <h1 class="display-title">
+    Your semester, distilled<br>
+    <span class="gradient-text">from PDF to clarity.</span>
+  </h1>
+
+  <p class="hero-lead">
+    Drop in a course syllabus PDF and get every exam, assignment, and project structured in seconds. Edit any due date inline, export universal .ics files, or sync straight to Google Calendar.
+  </p>
+
+  <div class="hero-actions">
+    {{if .User}}
+      <a class="btn btn-primary btn-lg" href="/dashboard">Open Dashboard</a>
+      <a class="btn btn-lg" href="/dashboard/syllabi">Syllabi Library</a>
+    {{else}}
+      <a class="btn btn-primary btn-lg" href="/login">Get Started</a>
+      <a class="btn btn-lg" href="/login?mode=register">Create Account</a>
+    {{end}}
+  </div>
+
+  <div class="hero-preview" aria-label="Workspace preview">
+    <div class="preview-bar">
+      <div class="preview-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      <span class="pill pill-info">Live Syllabus Workspace</span>
+    </div>
+    <div class="grid grid-3">
+      <div class="course-item">
+        <div class="course-item-head">
+          <strong>CS 4349 · Advanced Algorithm Design</strong>
+          <span class="pill pill-success">Parsed</span>
+        </div>
+        <span class="small muted">Midterm Exam · Oct 14 · Exam</span>
+        <span class="small muted">Homework 3 · Nov 03 · Assignment</span>
+      </div>
+      <div class="course-item">
+        <div class="course-item-head">
+          <strong>Inline Deadline Editor</strong>
+          <span class="pill pill-info">Editable</span>
+        </div>
+        <span class="small muted">Adjust shifted due dates inline</span>
+        <span class="small muted">Filter by course, type, or keyword</span>
+      </div>
+      <div class="course-item">
+        <div class="course-item-head">
+          <strong>Calendar Export &amp; Sync</strong>
+          <span class="pill pill-success">Ready</span>
+        </div>
+        <span class="small muted">Universal .ics per course or all</span>
+        <span class="small muted">One-click Google Calendar sync</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container mt-6">
+  <div class="grid grid-3">
+    <article class="card card-interactive">
+      <div class="bento-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+      </div>
+      <h2 class="card-title">AI Syllabus Extraction</h2>
+      <p class="muted mt-2" style="margin-bottom: 0;">
+        Upload any PDF syllabus and Gemini automatically extracts course metadata, instructor details, exams, assignments, and milestone dates.
+      </p>
+    </article>
+
+    <article class="card card-interactive">
+      <div class="bento-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <h2 class="card-title">Unified Timeline &amp; Inline Edits</h2>
+      <p class="muted mt-2" style="margin-bottom: 0;">
+        Browse every course deadline in one searchable table, inspect original syllabus PDFs anytime, and edit shifted due dates inline in seconds.
+      </p>
+    </article>
+
+    <article class="card card-interactive">
+      <div class="bento-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </div>
+      <h2 class="card-title">Google Calendar &amp; .ics Export</h2>
+      <p class="muted mt-2" style="margin-bottom: 0;">
+        Download clean .ics calendar feeds for Apple Calendar, Outlook, or Notion, or sync extracted events directly into Google Calendar.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="container mt-6">
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <h2 class="card-title">Private by default. Built for focus.</h2>
+        <p class="muted small mt-2" style="margin-bottom: 0;">
+          Your uploaded syllabi stay isolated to your account with HttpOnly cookie sessions and one-click full account deletion.
+        </p>
+      </div>
+      <a class="btn btn-sm" href="/privacy">Read Privacy Policy</a>
+    </div>
+  </div>
+</section>
+{{end}}

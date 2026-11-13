@@ -1,0 +1,61 @@
+{{define "head_extra"}}
+{{if .GoogleClientID}}
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+{{end}}
+{{end}}
+
+{{define "content"}}
+<section class="container" data-filter-syllabus-id="{{.SyllabusID}}">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Semester Calendar</h1>
+      <p class="page-subtitle">Filter deadlines by course or type, edit any date inline, and export to .ics or Google Calendar.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <a class="btn" href="/api/download-calendar/all" download="Semester_Schedule.ics">Download All (.ics)</a>
+      {{if .GoogleClientID}}
+      <button id="syncGoogleCalBtn" type="button" class="btn btn-primary">Sync to Google Calendar</button>
+      {{end}}
+    </div>
+  </div>
+
+  {{if .GoogleClientID}}
+  <div class="alert alert-info mb-4">
+    <span>
+      <strong>Google API Limited Use Notice:</strong> SyllaBuddy requests temporary calendar-event permission (<code>calendar.events</code>) solely to write your selected course events into your Google Calendar. Your Google data is never sold, used for ads, or shared with third parties. <a href="/privacy#google-limited-use">Learn more</a>.
+    </span>
+  </div>
+  {{end}}
+
+  <div class="card mb-4">
+    <div class="grid grid-3" style="align-items: end;">
+      <div class="field">
+        <label for="calSearchInput">Search events or courses</label>
+        <input id="calSearchInput" type="search" class="input" placeholder="Search title, code, or description...">
+      </div>
+      <div class="field">
+        <label for="calTypeFilter">Event type</label>
+        <select id="calTypeFilter" class="select">
+          <option value="all">All types</option>
+          <option value="exam">Exams</option>
+          <option value="assignment">Assignments</option>
+          <option value="holiday">Holidays</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="calCourseFilter">Course</label>
+        <select id="calCourseFilter" class="select">
+          <option value="all">All courses</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="calendarCoursesContainer" class="form-stack">
+    <div class="card">
+      <p class="muted small" style="margin: 0;">Loading calendar events...</p>
+    </div>
+  </div>
+</section>
+{{end}}

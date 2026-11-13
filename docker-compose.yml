@@ -1,0 +1,45 @@
+services:
+  # --- 1. GO MONOLITHIC APP (Embedded SQLite + Backend + Embedded Web UI) ---
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: syllabuddy_app
+    restart: unless-stopped
+    mem_limit: 384m
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: "8080"
+      ENV: "production"
+      COOKIE_SECURE: "true"
+      DB_PATH: "/app/data/syllabuddy.db"
+      UPLOAD_DIR: "/app/uploads"
+      GOMEMLIMIT: "300MiB"
+      GOGC: "75"
+      APP_BASE_URL: ${APP_BASE_URL:-https://syllabuddy.me}
+    volumes:
+      - ./uploads_data:/app/uploads
+      - ./sqlite_data:/app/data
+
+  # --- 2. CADDY REVERSE PROXY (Automatic HTTPS) ---
+  caddy:
+    image: caddy:2-alpine
+    container_name: syllabuddy_caddy
+    restart: unless-stopped
+    mem_limit: 128m
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:

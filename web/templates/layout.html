@@ -1,0 +1,99 @@
+{{define "head_extra"}}{{end}}{{define "scripts"}}{{end}}<!DOCTYPE html>
+<html lang="en" data-server-theme="{{.Theme}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{if .PageTitle}}{{.PageTitle}}{{else}}SyllaBuddy — AI Syllabus Tracking &amp; Calendar Workspace{{end}}</title>
+  <meta name="description" content="Turn PDF syllabi into structured semester timelines, edit dates inline, and sync with Google Calendar or .ics.">
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <script src="/static/js/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="/static/css/app.css">
+  {{template "head_extra" .}}
+</head>
+<body data-page="{{.ActiveNav}}" data-google-client-id="{{.GoogleClientID}}">
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a class="brand" href="{{if .User}}/dashboard{{else}}/{{end}}">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 4h14a2 2 0 0 1 2 2v15l-9-5.5L3 21V6a2 2 0 0 1 2-2z"/>
+          </svg>
+        </span>
+        <span>SyllaBuddy</span>
+        <span class="brand-badge">Beta</span>
+      </a>
+
+      <nav id="primaryNav" class="nav-links" aria-label="Primary">
+        {{if .User}}
+          <a class="nav-link {{if eq .ActiveNav " dashboard"}}active{{end}}" href="/dashboard">Overview</a>
+          <a class="nav-link {{if eq .ActiveNav " syllabi"}}active{{end}}" href="/dashboard/syllabi">Syllabi</a>
+          <a class="nav-link {{if eq .ActiveNav " calendar"}}active{{end}}" href="/dashboard/calendar">Calendar</a>
+          <a class="nav-link {{if eq .ActiveNav " settings"}}active{{end}}" href="/dashboard/settings">Settings</a>
+        {{else}}
+          <a class="nav-link {{if eq .ActiveNav " landing"}}active{{end}}" href="/">Home</a>
+          <a class="nav-link {{if eq .ActiveNav " privacy"}}active{{end}}" href="/privacy">Privacy</a>
+          <a class="nav-link {{if eq .ActiveNav " terms"}}active{{end}}" href="/terms">Terms</a>
+        {{end}}
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggleBtn" type="button" class="btn btn-icon btn-ghost" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+          </svg>
+        </button>
+
+        {{if .User}}
+          <button id="logoutBtn" type="button" class="btn btn-sm">Sign Out</button>
+        {{else}}
+          <a class="btn btn-primary btn-sm" href="/login">Sign In</a>
+        {{end}}
+
+        <button id="navMenuBtn" type="button" class="btn btn-icon nav-toggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    {{template "content" .}}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="flex items-center gap-2">
+          <strong>SyllaBuddy</strong>
+          <span class="muted">· Academic Workspace</span>
+        </div>
+        <p class="mt-2" style="margin-bottom: 4px; max-width: 620px;">
+          Beta Notice: AI-extracted exam, assignment, and holiday dates may contain inaccuracies. Always verify deadlines against your official course syllabus.
+        </p>
+        <p style="margin: 0; max-width: 620px;">
+          Storage Notice: SyllaBuddy uses strictly essential HttpOnly session cookies and localStorage theme preferences—no third-party advertising or tracking cookies.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        {{if .User}}
+          <a href="/dashboard/settings">Account &amp; Data Deletion</a>
+        {{else}}
+          <a href="/login">Sign In</a>
+        {{end}}
+      </div>
+    </div>
+  </footer>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="/static/js/app.js" defer></script>
+  {{template "scripts" .}}
+</body>
+</html>

@@ -1,0 +1,102 @@
+{{define "content"}}
+<section class="container container-narrow">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Account &amp; Workspace Settings</h1>
+      <p class="page-subtitle">Manage your profile, security credentials, appearance, and full data deletion.</p>
+    </div>
+  </div>
+
+  <div class="form-stack">
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Appearance</h2>
+        <span class="pill pill-neutral">Saved locally</span>
+      </div>
+      <p class="small muted mt-2">Switch between crisp White/Blue light mode and spatial Black/Blue dark mode.</p>
+      <div class="segmented mt-2" role="group" aria-label="Theme preference">
+        <button type="button" class="segmented-btn" data-theme-choice="light">Light (White / Blue)</button>
+        <button type="button" class="segmented-btn" data-theme-choice="dark">Dark (Black / Blue)</button>
+        <button type="button" class="segmented-btn" data-theme-choice="system">System</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Profile</h2>
+        {{if .User}}<span class="small muted">{{.User.Email}}</span>{{end}}
+      </div>
+      <form id="profileForm" class="form-stack">
+        <div class="field">
+          <label for="profileUsername">Username</label>
+          <input id="profileUsername" type="text" class="input" required minlength="3" maxlength="50" value="{{if .User}}{{.User.Username}}{{end}}">
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Save Username</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Change Password</h2>
+      </div>
+      <form id="passwordForm" class="form-stack">
+        <div class="field">
+          <label for="currentPassword">Current Password</label>
+          <input id="currentPassword" type="password" class="input" required autocomplete="current-password">
+        </div>
+        <div class="field">
+          <label for="newPassword">New Password (minimum 8 characters)</label>
+          <input id="newPassword" type="password" class="input" required minlength="8" autocomplete="new-password">
+        </div>
+        <div>
+          <button type="submit" class="btn">Update Password</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Google Integration &amp; Data Policy</h2>
+        {{if .GoogleClientID}}
+          <span class="pill pill-success">Configured</span>
+        {{else}}
+          <span class="pill pill-neutral">Not configured</span>
+        {{end}}
+      </div>
+      <p class="small muted" style="margin-bottom: 0;">
+        Google Sign-In authenticates your identity via verified Google ID tokens. Google Calendar Sync uses on-demand browser OAuth permission (<code>calendar.events</code>) only when you click Sync, adhering strictly to the <a href="/privacy#google-limited-use">Google API Services User Data Policy (Limited Use)</a>.
+      </p>
+    </section>
+
+    <section class="card" style="border-color: var(--status-danger-border);">
+      <div class="card-header">
+        <h2 class="card-title" style="color: var(--status-danger-ink);">Danger Zone — Delete Account &amp; All Data</h2>
+      </div>
+      <p class="small muted">
+        Permanently deletes your account, all uploaded syllabus PDFs, cached thumbnails, extracted events, and saved UT Dallas course plans. This action cannot be undone.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <button id="showDeleteAccountBtn" type="button" class="btn btn-danger">Delete Account &amp; All Data</button>
+      </div>
+
+      <div id="deleteAccountConfirmBox" class="hidden mt-4">
+        <div class="alert alert-danger mb-4">
+          <span>Type <strong>DELETE</strong> below to permanently erase your account and all associated files.</span>
+        </div>
+        <form id="deleteAccountForm" class="form-stack">
+          <div class="field">
+            <label for="deleteConfirmInput">Confirmation</label>
+            <input id="deleteConfirmInput" type="text" class="input" placeholder="Type DELETE to confirm" autocomplete="off">
+          </div>
+          <div class="flex gap-2">
+            <button type="submit" class="btn btn-danger">Permanently Delete Everything</button>
+            <button id="cancelDeleteAccountBtn" type="button" class="btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+</section>
+{{end}}

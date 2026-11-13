@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* This enforces light mode by default */
+:root {
+    background-color: white;
+    color: #0f172a; /* slate-900 */
+}

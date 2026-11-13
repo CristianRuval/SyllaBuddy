@@ -1,0 +1,65 @@
+{{define "content"}}
+<section class="container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Welcome back{{if .User}}, {{.User.Username}}{{end}}</h1>
+      <p class="page-subtitle">Upload PDF syllabi, review extracted deadlines, and export your semester calendar.</p>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <a class="btn" href="/dashboard/syllabi">Syllabi Library</a>
+      <a class="btn btn-primary" href="/dashboard/calendar">Master Calendar</a>
+    </div>
+  </div>
+
+  <div class="grid grid-3 mb-4">
+    <div class="card">
+      <span class="small muted">Uploaded Syllabi</span>
+      <div id="statSyllabiCount" class="stat-value">—</div>
+    </div>
+    <div class="card">
+      <span class="small muted">Tracked Events</span>
+      <div id="statEventsCount" class="stat-value">—</div>
+    </div>
+    <div class="card">
+      <span class="small muted">Upcoming Deadlines</span>
+      <div id="statUpcomingCount" class="stat-value">—</div>
+    </div>
+  </div>
+
+  <div class="grid grid-2">
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Quick Syllabus Upload</h2>
+        <span class="pill pill-info">Gemini PDF Parser</span>
+      </div>
+
+      <form id="dashboardUploadForm">
+        <div id="uploadDropzone" class="dropzone" tabindex="0" role="button" aria-label="Select or drop a PDF syllabus">
+          <input id="syllabusFileInput" type="file" accept=".pdf,application/pdf" class="hidden">
+          <p style="margin: 0; font-weight: 600;">Drop a PDF syllabus here or click to browse</p>
+          <p class="small muted mt-2" style="margin-bottom: 0;">PDF files up to 15 MB. Only upload academic syllabi you are permitted to use.</p>
+        </div>
+      </form>
+
+      <div id="uploadStatusBanner" class="alert alert-info hidden mt-4" role="status">
+        <span id="uploadStatusText">Uploading and parsing syllabus...</span>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <a class="btn btn-sm" href="/dashboard/syllabi">View All Syllabi</a>
+        <a class="btn btn-sm" href="/dashboard/calendar">Edit &amp; Export Calendar</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Upcoming Events</h2>
+        <a class="small" href="/dashboard/calendar">See all</a>
+      </div>
+      <div id="upcomingEventsList" class="form-stack">
+        <p class="small muted" style="margin: 0;">Loading upcoming deadlines...</p>
+      </div>
+    </section>
+  </div>
+</section>
+{{end}}

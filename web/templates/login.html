@@ -1,0 +1,69 @@
+{{define "head_extra"}}
+{{if .GoogleClientID}}
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+{{end}}
+{{end}}
+
+{{define "content"}}
+<section class="container">
+  <div class="auth-wrap">
+    <div class="card">
+      <div class="flex items-center justify-between gap-3 mb-4">
+        <div>
+          <h1 class="page-title" style="font-size: 1.5rem;">Welcome to SyllaBuddy</h1>
+          <p class="muted small mt-2" style="margin-bottom: 0;">Access your uploaded syllabi and semester calendars.</p>
+        </div>
+        <div class="segmented" role="tablist" aria-label="Authentication mode">
+          <button id="tabSignIn" type="button" class="segmented-btn active" role="tab" aria-selected="true">Sign In</button>
+          <button id="tabRegister" type="button" class="segmented-btn" role="tab" aria-selected="false">Create Account</button>
+        </div>
+      </div>
+
+      <div id="authError" class="alert alert-danger hidden mb-4" role="alert"></div>
+
+      <form id="loginForm" class="form-stack" autocomplete="on">
+        <div class="field">
+          <label for="loginUsername">Username or Email</label>
+          <input id="loginUsername" name="username" type="text" class="input" required autocomplete="username" placeholder="temoc">
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" class="input" required autocomplete="current-password" placeholder="Enter your password">
+        </div>
+        <button id="loginSubmitBtn" type="submit" class="btn btn-primary btn-lg">Sign In</button>
+      </form>
+
+      <form id="registerForm" class="form-stack hidden" autocomplete="on">
+        <div class="field">
+          <label for="regUsername">Username</label>
+          <input id="regUsername" name="username" type="text" class="input" required minlength="3" maxlength="50" autocomplete="username" placeholder="Choose a username">
+        </div>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input id="regEmail" name="email" type="email" class="input" required autocomplete="email" placeholder="you@utdallas.edu">
+        </div>
+        <div class="field">
+          <label for="regPassword">Password (minimum 8 characters)</label>
+          <input id="regPassword" name="password" type="password" class="input" required minlength="8" autocomplete="new-password" placeholder="Create a strong password">
+        </div>
+        {{if .RequireInviteCode}}
+        <div class="field">
+          <label for="regInviteCode">Beta Invite Code</label>
+          <input id="regInviteCode" name="invite_code" type="text" class="input" required placeholder="Enter beta access code">
+        </div>
+        {{end}}
+        <button id="registerSubmitBtn" type="submit" class="btn btn-primary btn-lg">Create Account</button>
+      </form>
+
+      {{if .GoogleClientID}}
+      <div class="divider-text">or continue with Google</div>
+      <div id="googleSignInSlot" class="google-btn-slot"></div>
+      {{end}}
+
+      <p class="small muted mt-4" style="margin-bottom: 0; text-align: center;">
+        By continuing, you agree to our <a href="/terms">Terms of Service</a> and acknowledge our <a href="/privacy">Privacy Policy</a> (including Google API Limited Use &amp; AI syllabus processing notices).
+      </p>
+    </div>
+  </div>
+</section>
+{{end}}

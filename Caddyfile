@@ -1,0 +1,29 @@
+syllabuddy.me {
+    # Compress HTML, CSS, JS, JSON, SVG, and .ics responses
+    encode gzip zstd
+
+    # Reject oversized payloads before they reach the Go server (15 MB PDF + multipart overhead)
+    request_body {
+        max_size 20MB
+    }
+
+    # Edge security headers (Content-Security-Policy is set by the Go app middleware)
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        # Allows Google Identity Services (GIS) OAuth/Calendar popups to postMessage back.
+        # Note: If a browser/GIS flow blocks popup communication, test changing this to "unsafe-none".
+        Cross-Origin-Opener-Policy "same-origin-allow-popups"
+        -Server
+    }
+
+    # Single monolithic origin serves both SSR/static web UI and /api/* (zero CORS issues)
+    reverse_proxy syllabuddy_app:8080
+}
+
+# Optional: uncomment once a www DNS A record points to the same GCP VM IP
+# www.syllabuddy.me {
+#     redir https://syllabuddy.me{uri} permanent
+# }

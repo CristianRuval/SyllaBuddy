@@ -1,0 +1,10 @@
+# Local Docker Desktop test override (http://localhost:8080 without Caddy/HTTPS)
+# Run: docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build app
+services:
+  app:
+    ports:
+      - "8080:8080"
+    environment:
+      ENV: "development"
+      COOKIE_SECURE: "false"
+      APP_BASE_URL: "http://localhost:8080"

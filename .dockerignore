@@ -1,0 +1,33 @@
+# Legacy Python/Next.js directories (unused in Go monolithic build)
+backend/
+frontend/
+
+# Runtime uploads and local data
+uploads_data/
+uploads/
+sqlite_data/
+data/
+*.db
+*.db-wal
+*.db-shm
+*.log
+*.pdf
+
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+.envy
+
+# Version control, IDE, and OS metadata
+.git/
+.gitignore
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Docs
+DEPLOYMENT.md
+README.md
